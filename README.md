@@ -68,8 +68,9 @@ sudo ufw enable
 ```
 
 #### 4. Deploy n8n Container
+The following command configures a `nip.io` domain automatically, which allows n8n to handle OAuth callbacks (like connecting to Google Sheets) correctly.
 
-The following command disables the secure cookie requirement (needed for IP-based access) and sets permission ownership.
+*Replace `YOUR_IP` with your actual Public IP.*
 
 ```bash
 mkdir -p ~/.n8n
@@ -80,6 +81,7 @@ docker run -d \
   --name n8n \
   -p 5678:5678 \
   -e N8N_SECURE_COOKIE=false \
+  -e WEBHOOK_URL=http://YOUR_IP.nip.io:5678 \
   -v ~/.n8n:/home/node/.n8n \
   n8nio/n8n
 ```
